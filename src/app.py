@@ -1,16 +1,17 @@
+from flask import Flask, request
 import subprocess
 
-def add(a, b):
-    return a + b
+app = Flask(__name__)
 
-def divide(a, b):
-    if b == 0:
-        raise ValueError("Tidak boleh bagi nol")
-    return a / b
+@app.route("/")
+def home():
+    return "DevSecOps Practice App is Running!"
 
-def run_command(cmd_list):
-    
-    result = subprocess.run(
-        cmd_list, shell=False, capture_output=True, text=True
-    )
-    return result.stdout
+@app.route("/ping")
+def ping():
+    ip = request.args.get("ip", "127.0.0.1")
+    # Pengujian simulasi DAST
+    return f"Pinging {ip}"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)

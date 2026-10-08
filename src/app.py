@@ -8,9 +8,9 @@ def divide(a, b):
         raise ValueError("Tidak boleh bagi nol")
     return a / b
 
-def run_command(cmd):
-    # Penggunaan shell=True berisiko tinggi terhadap Command Injection
+def run_command(cmd_list):
+    
     result = subprocess.run(
-        cmd, shell=True, capture_output=True, text=True
+        cmd_list, shell=False, capture_output=True, text=True
     )
     return result.stdout
